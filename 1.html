@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    .header-cartoon{
+        height: 494px;
+        width: 1144px;
+        background-color: rgb(243, 240, 246);
+        overflow: hidden;
+    }
+    .header-cartoon-imglist{
+        width: 5720px;
+        height: 494px;
+    }
+    
+    .header-cartoon-imglist img{
+        height: 494px;
+        width: 1144px;   
+    }
+    
+    .header-cartoon-imglist li{
+        float: left;
+    }
+    .header-cartoon-up{
+        background-color: rgb(140, 159, 173);
+        color: rgb(246, 248, 250);
+        opacity: 70%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        cursor: pointer;
+    }
+    .header-cartoon-down{
+        background-color: rgb(53, 59, 63);
+        color: rgb(246, 248, 250);
+        opacity: 70%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        cursor: pointer;
+    }
+    .header-cartoon-lilist{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        float:right;
+        
+    }
+    .header-cartoon-lilist li{
+        background-color: rgb(63, 68, 68);
+        width: 8px;
+        height: 8px;
+        border: 3px solid rgb(74, 66, 66);
+        border-radius: 50%;
+        opacity: 70%;
+        
+        border-radius: 50%;
+        text-align: center;
+        line-height: 20px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    </style>
+</body>
+<div class="header-cartoon">
+    <ul class="header-cartoon-imglist">
+        <li><img src="./photo/cartoon1.webp"></li>
+        <li><img src="./photo/cartoon2.webp"></li>
+        <li><img src="./photo/cartoon3.webp"></li>
+        <li><img src="./photo/cartoon4.webp"></li>
+        <li><img src="./photo/cartoon1.webp"></li>
+    </ul>
+    <ul class="header-cartoon-lilist">
+        <li value="1"></li>
+        <li value="2"></li>
+        <li value="3"></li>
+        <li value="4"></li>
+     </ul>
+     <div class="header-cartoon-up"><</div>
+     <div class="header-cartoon-down">></div>
+</div>
+<script>
+            var imglist=document.querySelector('.header-cartoon-imglist');
+        var aup=document.querySelector('.header-cartoon-up');
+        var adown=document.querySelector('.header-cartoon-down');
+        var ali=document.querySelectorAll('.header-cartoon-lilist li');
+        var li=document.querySelector('.header-cartoon-lilist');
+        var  left=0;
+        // var timer;
+        var n;
+        run();
+       function run(){
+       if(left<=-4576){
+        left=0;
+       }
+       if(left%1144==0)
+       {
+        n=1200;
+       }
+       else{
+        n=10;
+       }
+      
+       var x=Math.floor(-left/1144);
+       lilocat(x);
+        imglist.style.marginLeft=left + 'px';
+         left=left-10;
+        timer=setTimeout(run,n);
+       }
+       function locat(x)
+       {
+        let a=-(x*1144);
+        imglist.style.marginLeft=a + 'px';
+        left=a;
+        console.log(left);
+       }
+       aup.onclick=function()
+       {
+        // alert("1");
+            let gotoup=Math.floor(-left/1144)-1;
+            if(gotoup==-1)
+            {
+                gotoup=3;
+            }
+            locat(gotoup);
+       } 
+       adown.onclick=function()
+       {
+        // alert('2');
+            let gotodown=Math.floor(-left/1144)+1;
+            if(gotodown==4)
+            {
+                gotodown=0;
+            }
+            locat(gotodown);
+        } 
+        function lilocat(x)
+        {
+            for(let i=0;i<ali.length;i++)
+            {
+            ali[i].style.backgroundColor='';
+            } 
+            if(x<ali.length)
+            {
+                ali[x].style.backgroundColor='white';
+            } 
+        }
+        li.onclick=function(){
+            var tar=event.srcElement;
+            // var tar=event.target;
+            // var round=tar.innerHTML-1;
+            var round=tar.value-1;
+            lilocat(round);
+            locat(round);
+        }
+        imglist.onmouseout=function(){
+           run();
+        }
+        imglist.onmouseover=function(){
+            clearTimeout(timer);
+        }
+</script>
+</html>
